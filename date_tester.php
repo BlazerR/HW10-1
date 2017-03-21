@@ -30,7 +30,7 @@
         <?php if ($message != '') : ?>          
             <p><?php echo $message; ?></p>
         <?php else : ?>
-        <table>
+        <table cellspacing="5px">
             <tr>
                 <td>Invoice date:</td>
                 <td><?php echo $invoice_date_f; ?></td>
