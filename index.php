@@ -64,17 +64,25 @@ switch ($action) {
             } 
           $format_string = 'F j, Y';
         // format both dates
-        $invoice_date_f = 'not implemented yet';
-        $due_date_f = 'not implemented yet'; 
+        $invoice_date_f = $invoice_date_o->format($format_string);
+        $due_date_f = $due_date_o->format($format_string); 
         
         // get the current date and time and format it
-        $current_date_f = 'not implemented yet';
-        $current_time_f = 'not implemented yet';
+        $current_date_o = new DateTime();
+        $current_date_f = $current_date_o->format($format_string);
+        $current_time_f = $current_date_o->format('g:i:s a');
         
         // get the amount of time between the current date and the due date
-        // and format the due date message
-        $due_date_message = 'not implemented yet';
+        $time_span = $current_date_o->diff($due_date_o); 
+         if ($due_date_o < $current_date_o) { 
+             $due_date_message = $time_span->format( 
+                 'This invoice is %y years, %m months, and %d days overdue.'); 
 
+        // and format the due date message
+        } else { 
+             $due_date_message = $time_span->format( 
+                 'This invoice is due in %y years, %m months, and %d days.'); 
+        } 
         break;
 }
 include 'date_tester.php';
