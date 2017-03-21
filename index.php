@@ -1,4 +1,14 @@
 <?php
+
+date_default_timezone_set('EST'); 
+  
+ if (isset($_POST['action'])) { 
+     $action =  $_POST['action']; 
+ } else { 
+     $action =  'start_app'; 
+ } 
+  
+
 //set default value
 $message = '';
 
