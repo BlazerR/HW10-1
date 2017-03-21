@@ -31,11 +31,27 @@ switch ($action) {
         $due_date_s = filter_input(INPUT_POST, 'due_date');
 
         // make sure the user enters both dates
-
+            if (empty($invoice_date_s) || 
+             empty($due_date_s)) { 
+             $message = "Please enter two valid dates."; 
+             break; 
+         } 
         // convert date strings to DateTime objects
+            try { 
+             $invoice_date_o = new DateTime($invoice_date_s); 
+             $due_date_o = new DateTime($due_date_s); 
+         } catch (Exception $e) { 
+             $message = 'Make sure both of your dates are valid please.'; 
+             break; 
+         } 
+
         // and use a try/catch to make sure the dates are valid
 
         // make sure the due date is after the invoice date
+          if ($due_date_o < $invoice_date_o) { 
+             $message = 'The due date must come after the invoice date. Please try                 again.'; 
+               break; 
+         } 
 
         // format both dates
         $invoice_date_f = 'not implemented yet';
